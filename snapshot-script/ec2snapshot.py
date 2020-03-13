@@ -54,5 +54,19 @@ def stop_instances(project):
 
     return
 
+@instances.command('start')
+@click.option('--project', default=None,
+    help='Only instances for project')
+def start_instances(project):
+    'Start EC2 instances'
+
+    instances = filter_instances(project)
+
+    for i in instances:
+        print('Starting {0}...'.format(i.id))
+        i.start()
+
+    return
+
 if __name__ == '__main__':
     instances()
