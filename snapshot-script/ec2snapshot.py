@@ -35,15 +35,16 @@ def list_snapshots(project):
     for i in instances:
         for v in i.volumes.all():
             for s in v.snapshots.all():
-                print(", .join"((
+                print(", ".join((
                 s.id,
                 v.id,
                 i.id,
                 s.state,
                 s.progress,
-                s.start_time.strftime('%c')
+                s.start_time.strftime("%c")
             )))
 
+            if s.state == 'completed': break
     return
 
 @cli.group('volumes')
